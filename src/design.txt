@@ -1,0 +1,53 @@
+Component nav bar
+-Portraits
+-Router on click
+Aizen City Builder MD
+Whenever user is in a route it should be highlighted
+
+---------------------------
+Component Aizen
+OnClick-Light's laugh
+---------------------------
+Component City
+State 
+    AI choices - 3 elements
+    Maybe? - Rotate city elements
+    Player choices - Array that stores elements
+        Objects Element : Class
+        Element a
+        Element b
+        Element c
+Functions
+    AIChooses - Should fill the AI choices array with objects
+    DisplayElement - forEach -> Toggles class / CSS changes the background
+    CheckStatus - if playerChoices.length === 3 a submit button should appear
+    Destiny - playerChoices.forEach -> Checks if the AIChoices at the same index element is identical
+        *If it is then img starts shining even more
+        *If it isn't a lighting should strike the city and destroy it -> displayHints()
+    DisplayHints - opens a modal containing a retry button and a hint - WHEN RETRYING COMPUTER CHOICES SHOULD STAY THE SAME
+UseEffect
+    Only on mount AIChooses()
+    [PlayerChoices] -> On change triggers DisplayElement / Could try displaying the state directly in elements? Like <div class = playerChoices.elementA.>
+                    -> Also triggers checkStatus
+Functionability
+    3 + signs that open a modal on click -> Modal also has 3 options to choose from - Elements to place -> onClick changes the state of the corresponding element to whatever class it should have
+    *Submit button -> onClick display img / start countdown -> triggers destiny()
+
+
+
+---------------------------
+Component Maquina de los deseos
+State
+    Elements - Array - Format: Element : Rarity
+Functions
+    generateElement - Returns an element + rarity (rarity chance should vary)
+    FillElements - For loop? Calls generateElement-> Fills the Elements array - Format: Element : Rarity
+    RandomPlacement() - Returns random coordinates
+    AssignElement(element) - Elements.forEach -> Calls RandomPlacement() -> assigns the coordinates to the element using style    
+UseEffect
+    fillElements()
+Functionability
+    Blank page with randomly placed elements
+    On click a modal should open and an option to fetch something should appear
+
+
