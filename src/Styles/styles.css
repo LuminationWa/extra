@@ -25,6 +25,10 @@ body, #root, .App {
     width: 50px;
 }
 
+.nav .portrait:hover {
+    cursor: pointer;
+}
+
 .portrait#aizen {
     text-align: center;
     background-color: red;
@@ -48,4 +52,53 @@ body, #root, .App {
 
 .submit {
     display: none;
+}
+
+.submit-show {
+    display: inline-block;
+}
+
+.modal-img {
+    height: 50px;
+    width: 50px;
+    background-color: purple;
+}
+
+#city dialog {
+ 
+}
+
+#city dialog div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+dialog span {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    height: 100px;
+    width: 50px;
+    gap: 8px;
+}
+
+/* Maquina deseos */
+
+#root #content {
+    display: flex;
+    flex-direction: column;
+}
+
+#maquina-deseos-div {
+    display: flex;
+    align-items: center;
+    min-height: 88vh;
+}
+
+.maquina-btn {
+    height: 5px;
+    width: 5px;
+    position: absolute;
 }
