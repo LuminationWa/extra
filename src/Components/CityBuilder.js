@@ -102,7 +102,7 @@ const CityBuilder = () => {
   const displayElement = () => {};
 
   const checkStatus = () => {
-    if (playerChoices.length === 3) submitBtn.classList.add("submit-show");
+    if (playerChoices.length === 3  && playerChoices[0] && playerChoices[1] && playerChoices[2]) submitBtn.classList.add("submit-show");
   };
 
   const destiny = () => {
