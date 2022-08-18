@@ -4,19 +4,26 @@ import { Link } from "react-router-dom";
 const Nav = () => {
   return (
     <div className="nav">
-      <button className="portrait" id="aizen">
-        Aizen
-      </button>
-      <Link to="./city">
-      <button className="portrait" id="city-builder">
-        City Builder
-      </button>
-      </Link>
-      <Link to="./deseos">
-      <button className="portrait" id="maquina-deseos">
-        Maquina de los deseos
-      </button>
-      </Link>
+      <div className="flex-div">
+        <button className="portrait" id="aizen"></button>
+        <h1 id="aizen-text">Aizen</h1>
+      </div>
+      <div className="flex-div">
+        <Link to="./city">
+          <div class="link-portrait">
+            <button className="portrait" id="city-builder"></button>
+            <h1 id="city-text">Hermaneishion</h1>
+          </div>
+        </Link>{" "}
+      </div>
+      <div className="flex-div">
+        <Link to="./deseos">
+          <div class="link-portrait">
+            <button className="portrait" id="maquina-deseos"></button>{" "}
+            <h1 id="portrait-text">RNG</h1>
+          </div>
+        </Link>{" "}
+      </div>
     </div>
   );
 };

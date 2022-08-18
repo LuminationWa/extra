@@ -1,4 +1,11 @@
 import React, { useState, useEffect } from "react";
+import Main1 from "../Images/City/Main1.png";
+import Main2 from "../Images/City/Main2.png";
+import Main3 from "../Images/City/Main3.png";
+import Side1 from "../Images/City/Side1.png";
+import Side2 from "../Images/City/Side2.png";
+import Side3 from "../Images/City/Side3.png";
+
 const CityBuilder = () => {
   const [AIChoices, setAIChoices] = useState([]);
   const [playerChoices, setPlayerChoices] = useState([]);
@@ -16,8 +23,7 @@ const CityBuilder = () => {
 
   useEffect(() => {
     checkStatus();
-    console.log("second useEffect triggered");
-    console.log(playerChoices);
+    setUrl();
   }, [playerChoices]);
 
   function getRandomInt(max) {
@@ -26,6 +32,51 @@ const CityBuilder = () => {
 
   const AIChooses = (element) => {
     setAIChoices((arr) => [...arr, element]);
+  };
+
+  const setUrl = () => {
+    let cityL = document.getElementById("city-1");
+    let cityM = document.getElementById("city-2");
+    let cityR = document.getElementById("city-3");
+    playerChoices.forEach((element, index) => {
+      if (index === 0) {
+        switch (element) {
+          case 1:
+            cityL.src = Side1;
+            break;
+          case 2:
+            cityL.src = Side2;
+            break;
+          case 3:
+            cityL.src = Side3;
+            break;
+        };
+      } else if (index === 1) {
+        switch (element) {
+          case 1:
+            cityM.src = Main1;
+            break;
+          case 2:
+            cityM.src = Main2;
+            break;
+          case 3:
+            cityM.src = Main3;
+            break;
+        };
+      } else {
+        switch (element) {
+          case 1:
+            cityR.src = Side1;
+            break;
+          case 2:
+            cityR.src = Side2;
+            break;
+          case 3:
+            cityR.src = Side3;
+            break;
+        };
+      };
+    });
   };
 
   const playerChooses = (element, choice) => {
@@ -58,13 +109,13 @@ const CityBuilder = () => {
     let count = 0;
     for (let i = 0; i < playerChoices.length; i++) {
       if (playerChoices[i] === AIChoices[i]) count++;
-    };
+    }
     if (count < 3) apocalypsis();
     console.log(playerChoices, AIChoices, count);
   };
 
   const apocalypsis = () => {
-    console.log('triggered apocalypsis');
+    console.log("triggered apocalypsis");
     displayHints();
   };
 
@@ -72,11 +123,17 @@ const CityBuilder = () => {
 
   return (
     <div id="city">
+      <div id="city-content">
+        <img id="city-1"></img>
+        <img id="city-2"></img>
+        <img id="city-3"></img>
+      </div>
       <dialog id="modal-a">
         <div>
           <span>
-            <img className="modal-img"></img>
+            <img className="modal-img" src={Side1}></img>
             <button
+              className="button-85"
               onClick={() => {
                 modalA.close();
                 playerChooses("A", 1);
@@ -86,8 +143,9 @@ const CityBuilder = () => {
             </button>
           </span>
           <span>
-            <img className="modal-img"></img>
+            <img className="modal-img" src={Side2}></img>
             <button
+              className="button-85"
               onClick={() => {
                 modalA.close();
                 playerChooses("A", 2);
@@ -97,8 +155,9 @@ const CityBuilder = () => {
             </button>
           </span>
           <span>
-            <img className="modal-img"></img>
+            <img className="modal-img" src={Side3}></img>
             <button
+              className="button-85"
               onClick={() => {
                 modalA.close();
                 playerChooses("A", 3);
@@ -112,8 +171,9 @@ const CityBuilder = () => {
       <dialog id="modal-b">
         <div>
           <span>
-            <img className="modal-img"></img>
+            <img className="modal-img" src={Main1}></img>
             <button
+              className="button-85"
               onClick={() => {
                 modalB.close();
                 playerChooses("B", 1);
@@ -123,8 +183,9 @@ const CityBuilder = () => {
             </button>
           </span>
           <span>
-            <img className="modal-img"></img>
+            <img className="modal-img" src={Main2}></img>
             <button
+              className="button-85"
               onClick={() => {
                 modalB.close();
                 playerChooses("B", 2);
@@ -134,8 +195,9 @@ const CityBuilder = () => {
             </button>
           </span>
           <span>
-            <img className="modal-img"></img>
+            <img className="modal-img" src={Main3}></img>
             <button
+              className="button-85"
               onClick={() => {
                 modalB.close();
                 playerChooses("B", 3);
@@ -149,8 +211,9 @@ const CityBuilder = () => {
       <dialog id="modal-c">
         <div>
           <span>
-            <img className="modal-img"></img>
+            <img className="modal-img" src={Side1}></img>
             <button
+              className="button-85"
               onClick={() => {
                 modalC.close();
                 playerChooses("C", 1);
@@ -160,8 +223,9 @@ const CityBuilder = () => {
             </button>
           </span>
           <span>
-            <img className="modal-img"></img>
+            <img className="modal-img" src={Side2}></img>
             <button
+              className="button-85"
               onClick={() => {
                 modalC.close();
                 playerChooses("C", 2);
@@ -171,8 +235,9 @@ const CityBuilder = () => {
             </button>
           </span>
           <span>
-            <img className="modal-img"></img>
+            <img className="modal-img" src={Side3}></img>
             <button
+              className="button-85"
               onClick={() => {
                 modalC.close();
                 playerChooses("C", 3);
@@ -184,38 +249,43 @@ const CityBuilder = () => {
         </div>
       </dialog>
 
-      <button
-        onClick={() => {
-          modalA.showModal();
-          console.log(AIChoices);
-        }}
-      >
-        Element A
-      </button>
-      <button
-        onClick={() => {
-          modalB.showModal();
-          console.log(AIChoices);
-        }}
-      >
-        Element B
-      </button>
-      <button
-        onClick={() => {
-          modalC.showModal();
-          console.log(AIChoices);
-        }}
-      >
-        Element C
-      </button>
-      <button
-        className="submit"
-        onClick={() => {
-          destiny();
-        }}
-      >
-        Submit
-      </button>
+      <div id="btn-div">
+        <button
+          className="button-85"
+          onClick={() => {
+            modalA.showModal();
+            console.log(AIChoices);
+          }}
+        >
+          Element A
+        </button>
+        <button
+          className="button-85"
+          onClick={() => {
+            modalB.showModal();
+            console.log(AIChoices);
+          }}
+        >
+          Element B
+        </button>
+        <button
+          className="button-85"
+          onClick={() => {
+            modalC.showModal();
+            console.log(AIChoices);
+          }}
+        >
+          Element C
+        </button>
+        <button
+          className="submit"
+          onClick={() => {
+            destiny();
+          }}
+        >
+          Submit
+        </button>
+      </div>
     </div>
   );
 };
