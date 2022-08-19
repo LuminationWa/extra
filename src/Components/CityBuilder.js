@@ -1,12 +1,16 @@
 import React, { useState, useEffect } from "react";
+import useSound from "use-sound";
+import mySound from "../Audio/City-background.mp3";
 import Main1 from "../Images/City/Main1.png";
 import Main2 from "../Images/City/Main2.png";
 import Main3 from "../Images/City/Main3.png";
 import Side1 from "../Images/City/Side1.png";
 import Side2 from "../Images/City/Side2.png";
 import Side3 from "../Images/City/Side3.png";
+import Sound from "../Images/City/wave-sound.png";
 
 const CityBuilder = () => {
+  const [playSound, { stop }] = useSound(mySound, { volume: 0.5 });
   const [AIChoices, setAIChoices] = useState([]);
   const [playerChoices, setPlayerChoices] = useState([]);
   let submitBtn = document.querySelector(".submit");
@@ -25,6 +29,12 @@ const CityBuilder = () => {
     checkStatus();
     setUrl();
   }, [playerChoices]);
+
+  useEffect(() => {
+    return () => {
+      stop();
+    };
+  }, [stop]);
 
   function getRandomInt(max) {
     return Math.floor(Math.random() * max);
@@ -50,7 +60,7 @@ const CityBuilder = () => {
           case 3:
             cityL.src = Side3;
             break;
-        };
+        }
       } else if (index === 1) {
         switch (element) {
           case 1:
@@ -62,7 +72,7 @@ const CityBuilder = () => {
           case 3:
             cityM.src = Main3;
             break;
-        };
+        }
       } else {
         switch (element) {
           case 1:
@@ -74,8 +84,8 @@ const CityBuilder = () => {
           case 3:
             cityR.src = Side3;
             break;
-        };
-      };
+        }
+      }
     });
   };
 
@@ -102,7 +112,13 @@ const CityBuilder = () => {
   const displayElement = () => {};
 
   const checkStatus = () => {
-    if (playerChoices.length === 3  && playerChoices[0] && playerChoices[1] && playerChoices[2]) submitBtn.classList.add("submit-show");
+    if (
+      playerChoices.length === 3 &&
+      playerChoices[0] &&
+      playerChoices[1] &&
+      playerChoices[2]
+    )
+      submitBtn.classList.add("submit-show");
   };
 
   const destiny = () => {
@@ -123,6 +139,7 @@ const CityBuilder = () => {
 
   return (
     <div id="city">
+      <button onClick={() => playSound()} id="sound-btn"></button>
       <div id="city-content">
         <img id="city-1"></img>
         <img id="city-2"></img>
@@ -248,7 +265,6 @@ const CityBuilder = () => {
           </span>
         </div>
       </dialog>
-
       <div id="btn-div">
         <button
           className="button-85"
@@ -277,15 +293,15 @@ const CityBuilder = () => {
         >
           Element C
         </button>
-        <button
-          className="submit"
-          onClick={() => {
-            destiny();
-          }}
-        >
-          Submit
-        </button>
-      </div>
+      </div>{" "}
+      <button
+        className="submit"
+        onClick={() => {
+          destiny();
+        }}
+      >
+        Submit
+      </button>
     </div>
   );
 };

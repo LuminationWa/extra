@@ -4,8 +4,8 @@ const MaquinaDeseos = () => {
   const elementQty = 9;
 
   useEffect(() => {
-    console.log('triggered');
-    mainLoop();
+    console.log("triggered");
+    fillElements();
   }, []);
 
   function getRandomInt(max) {
@@ -26,14 +26,16 @@ const MaquinaDeseos = () => {
   const fillElements = () => {
     for (let i = 0; i < elementQty; i++) {
       setElements((arr) => [...arr, generateElement()]);
+      console.log(i);
     }
   };
   const placeElements = () => {
     let deseosDiv = document.getElementById("maquina-deseos-div");
+    deseosDiv.textContent = "";
     elements.forEach((element) => {
       let elementBtn = document.createElement("button");
-      elementBtn.style.marginLeft = `${getRandomInt(100)}%`;
-      elementBtn.style.marginBottom = `${getRandomInt(100)}%`;
+      elementBtn.style.left = `${getRandomInt(90)}%`;
+      elementBtn.style.bottom = `${getRandomInt(70) + 10}%`;
       elementBtn.textContent = element;
       elementBtn.classList.add("maquina-btn");
       console.log(deseosDiv);
@@ -42,7 +44,13 @@ const MaquinaDeseos = () => {
   };
 
   return (
-    <div id="maquina-deseos-div">
+    <div>
+      <button
+        onClick={() => {
+          mainLoop();
+        }}
+      ></button>
+      <div id="maquina-deseos-div"></div>
     </div>
   );
 };
