@@ -1,16 +1,17 @@
 import React, { useState, useEffect } from "react";
 import useSound from "use-sound";
-import mySound from "../Audio/City-background.mp3";
+import painPeko from "../Audio/painpeko.mp3";
+import elRich from "../Audio/elrich.mp3";
 import Main1 from "../Images/City/Main1.png";
 import Main2 from "../Images/City/Main2.png";
 import Main3 from "../Images/City/Main3.png";
 import Side1 from "../Images/City/Side1.png";
 import Side2 from "../Images/City/Side2.png";
 import Side3 from "../Images/City/Side3.png";
-import Sound from "../Images/City/wave-sound.png";
 
-const CityBuilder = () => {
-  const [playSound, { stop }] = useSound(mySound, { volume: 0.5 });
+const CityBuilder = (props) => {
+  const [playPeko, { stopPeko }] = useSound(painPeko, { volume: 0.5 });
+  const [playElrich, { stopElrich }] = useSound(elRich, { volume: 1});
   const [AIChoices, setAIChoices] = useState([]);
   const [playerChoices, setPlayerChoices] = useState([]);
   let submitBtn = document.querySelector(".submit");
@@ -22,19 +23,12 @@ const CityBuilder = () => {
     AIChooses(getRandomInt(3) + 1);
     AIChooses(getRandomInt(3) + 1);
     AIChooses(getRandomInt(3) + 1);
-    console.log("first useEffect triggered");
   }, []);
 
   useEffect(() => {
     checkStatus();
     setUrl();
   }, [playerChoices]);
-
-  useEffect(() => {
-    return () => {
-      stop();
-    };
-  }, [stop]);
 
   function getRandomInt(max) {
     return Math.floor(Math.random() * max);
@@ -109,8 +103,6 @@ const CityBuilder = () => {
     }
   };
 
-  const displayElement = () => {};
-
   const checkStatus = () => {
     if (
       playerChoices.length === 3 &&
@@ -127,19 +119,70 @@ const CityBuilder = () => {
       if (playerChoices[i] === AIChoices[i]) count++;
     }
     if (count < 3) apocalypsis();
-    console.log(playerChoices, AIChoices, count);
+    else {
+      win();
+    };
   };
 
   const apocalypsis = () => {
-    console.log("triggered apocalypsis");
-    displayHints();
+    let city = document.getElementById("city-content");
+    city.style.backgroundImage =
+      'url("https://media.giphy.com/media/TDK87zSVCkiwykyNMe/giphy-downsized-large.gif")';
+    playPeko();
+    alert(displayHints());
   };
 
-  const displayHints = () => {};
+  const displayHints = () => {
+    let hints = "";
+    if (playerChoices[0] != AIChoices[0]) {
+      switch (AIChoices[0]) {
+        case 1:
+          hints += "We vegan ";
+          break;
+        case 2:
+          hints += "We goth ";
+          break;
+        case 3:
+          hints += "We smurfing ";
+          break;
+      }
+    }
+    if (playerChoices[1] != AIChoices[1]) {
+      switch (AIChoices[1]) {
+        case 1:
+          hints += "SOL DE RUTA ";
+          break;
+        case 2:
+          hints += "BASADO EL DEL MEDIO ";
+          break;
+        case 3:
+          hints += "Googlemapeando el piso ";
+          break;
+      }
+    }
+    if (playerChoices[2] != AIChoices[2]) {
+      switch (AIChoices[2]) {
+        case 1:
+          hints += "Amazonian ganggg";
+          break;
+        case 2:
+          hints += "Protagonizando Malefica";
+          break;
+        case 3:
+          hints += "Ultima opcion brah";
+          break;
+      }
+    }
+    return hints;
+  };
+
+  const win = () => {
+    alert("insertar imagen de la hermani girando easy clapensio chasito honkai wins");
+    playElrich();
+  };
 
   return (
     <div id="city">
-      <button onClick={() => playSound()} id="sound-btn"></button>
       <div id="city-content">
         <img id="city-1"></img>
         <img id="city-2"></img>
@@ -156,7 +199,7 @@ const CityBuilder = () => {
                 playerChooses("A", 1);
               }}
             >
-              Pick
+              Select
             </button>
           </span>
           <span>
@@ -168,7 +211,7 @@ const CityBuilder = () => {
                 playerChooses("A", 2);
               }}
             >
-              Pick
+              Select
             </button>
           </span>
           <span>
@@ -180,7 +223,7 @@ const CityBuilder = () => {
                 playerChooses("A", 3);
               }}
             >
-              Pick
+              Select
             </button>
           </span>
         </div>
@@ -196,7 +239,7 @@ const CityBuilder = () => {
                 playerChooses("B", 1);
               }}
             >
-              Pick
+              Select
             </button>
           </span>
           <span>
@@ -208,7 +251,7 @@ const CityBuilder = () => {
                 playerChooses("B", 2);
               }}
             >
-              Pick
+              Select
             </button>
           </span>
           <span>
@@ -220,7 +263,7 @@ const CityBuilder = () => {
                 playerChooses("B", 3);
               }}
             >
-              Pick
+              Select
             </button>
           </span>
         </div>
@@ -236,7 +279,7 @@ const CityBuilder = () => {
                 playerChooses("C", 1);
               }}
             >
-              Pick
+              Select
             </button>
           </span>
           <span>
@@ -248,7 +291,7 @@ const CityBuilder = () => {
                 playerChooses("C", 2);
               }}
             >
-              Pick
+              Select
             </button>
           </span>
           <span>
@@ -260,7 +303,7 @@ const CityBuilder = () => {
                 playerChooses("C", 3);
               }}
             >
-              Pick
+              Select
             </button>
           </span>
         </div>
@@ -270,7 +313,6 @@ const CityBuilder = () => {
           className="button-85"
           onClick={() => {
             modalA.showModal();
-            console.log(AIChoices);
           }}
         >
           Element A
@@ -279,7 +321,6 @@ const CityBuilder = () => {
           className="button-85"
           onClick={() => {
             modalB.showModal();
-            console.log(AIChoices);
           }}
         >
           Element B
@@ -288,20 +329,30 @@ const CityBuilder = () => {
           className="button-85"
           onClick={() => {
             modalC.showModal();
-            console.log(AIChoices);
           }}
         >
           Element C
         </button>
       </div>{" "}
-      <button
-        className="submit"
-        onClick={() => {
-          destiny();
-        }}
-      >
-        Submit
-      </button>
+      <div class="bottom-btns">
+        <button
+          className="button-85"
+          onClick={() => {
+            let cityContent = document.getElementById("city-content");
+            cityContent.style.backgroundImage = `url('${props.storedElement}')`;
+          }}
+        >
+          Stored element
+        </button>{" "}
+        <button
+          className="submit button-85"
+          onClick={() => {
+            destiny();
+          }}
+        >
+          Submit
+        </button>
+      </div>
     </div>
   );
 };

@@ -88,6 +88,43 @@ dialog div {
   }
 }
 
+@keyframes glowingSR {
+  0% {
+    background-color: #ffffff;
+    box-shadow: 0 0 3px #ff1212;
+  }
+  50% {
+    background-color: #fcef7e;
+    box-shadow: 0 0 10px #ff9595;
+  }
+  100% {
+    background-color: #fde610;
+    box-shadow: 0 0 3px #ffffff;
+  }
+}
+
+@keyframes glowingSSR {
+  0% {
+    background-color: #ffffff;
+    box-shadow: 0 0 3px #ff96ed;
+    transform: rotate(0deg);
+    font-size: 13px;
+  }
+  50% {
+    background-color: #df7efc;
+    box-shadow: 0 0 10px #6e71ff;
+  }
+  100% {
+    background-color: #fc69f5;
+    box-shadow: 0 0 3px #fa6fff;
+    transform: rotate(359deg);
+    font-size: 20px;
+    font-weight: bold;
+    color: rgb(247, 188, 255);
+    -webkit-text-stroke: 2px #6e3270;
+  }
+}
+
 /* Nav */
 
 .nav {
@@ -340,6 +377,11 @@ dialog span {
   align-items: center;
 }
 
+.bottom-btns {
+  display: flex;
+  gap: 20px;
+}
+
 /* Maquina deseos */
 
 #root #content {
@@ -347,14 +389,45 @@ dialog span {
   flex-direction: column;
 }
 
-#maquina-deseos-div {
+#maquina-deseos-grl {
   display: flex;
   align-items: center;
+  justify-content: center;
   height: 86vh;
 }
 
+.priority-btn {
+  z-index: 1;
+}
+
 .maquina-btn {
-  height: 5px;
-  width: 5px;
+  height: 75px;
+  width: 75px;
   position: absolute;
+  border-radius: 50%;
+  cursor: pointer;
+  text-align: center;
+  
+}
+
+.glow-sr {
+  animation: glowingSR 1300ms infinite;
+}
+
+.glow-ssr {
+  animation: glowingSSR 1300ms infinite alternate-reverse;
+}
+
+#fetch-dialog img {
+  width: 300px;
+  height: 300px;
+}
+
+#fetch-dialog div {
+  display: flex;
+  gap: 8px;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
 }

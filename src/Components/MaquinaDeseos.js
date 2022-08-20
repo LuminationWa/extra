@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from "react";
-const MaquinaDeseos = () => {
+import FetchDialog from "./FetchDialog";
+const MaquinaDeseos = (props) => {
   const [elements, setElements] = useState([]);
-  const elementQty = 9;
+  const elementQty = 15;
+  const [currentRarity, setCurrentRarity] = useState("");
 
   useEffect(() => {
-    console.log("triggered");
     fillElements();
   }, []);
 
@@ -26,7 +27,6 @@ const MaquinaDeseos = () => {
   const fillElements = () => {
     for (let i = 0; i < elementQty; i++) {
       setElements((arr) => [...arr, generateElement()]);
-      console.log(i);
     }
   };
   const placeElements = () => {
@@ -34,22 +34,39 @@ const MaquinaDeseos = () => {
     deseosDiv.textContent = "";
     elements.forEach((element) => {
       let elementBtn = document.createElement("button");
-      elementBtn.style.left = `${getRandomInt(90)}%`;
+      elementBtn.style.left = `${getRandomInt(95)}%`;
       elementBtn.style.bottom = `${getRandomInt(70) + 10}%`;
       elementBtn.textContent = element;
+      if (element === "SR") elementBtn.classList.add("glow-sr");
+      if (element === "SSR") elementBtn.classList.add("glow-ssr");
       elementBtn.classList.add("maquina-btn");
-      console.log(deseosDiv);
+      if (element === "SSR" || element === "SR") {
+        elementBtn.addEventListener("click", function () {
+          setCurrentRarity(element);
+          let dialog = document.querySelector("dialog");
+          dialog.showModal();
+        });
+      }
       deseosDiv.append(elementBtn);
     });
   };
 
   return (
-    <div>
+    <div id="maquina-deseos-grl">
+      <FetchDialog
+        rarity={currentRarity}
+        setStoredElement={props.setStoredElement}
+      />
       <button
+        class="priority-btn"
         onClick={() => {
           mainLoop();
         }}
-      ></button>
+      >
+        {" "}
+        TUC CAMBIAS DE CANAL TUC CAMBIAS DE CANAL ES UNA COSA DE LOCOS ESTOY
+        TRANQUILO ACA ESTOY STREAMEANDO
+      </button>
       <div id="maquina-deseos-div"></div>
     </div>
   );
